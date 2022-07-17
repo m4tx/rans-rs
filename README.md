@@ -2,6 +2,7 @@ rans-rs
 =======
 
 [![Build Status](https://github.com/m4tx/rans-rs/workflows/Rust%20CI/badge.svg)](https://github.com/m4tx/rans-rs/actions)
+[![crates.io](https://img.shields.io/crates/v/rans.svg)](https://crates.io/crates/rans)
 [![Documentation](https://docs.rs/rans/badge.svg)](https://docs.rs/rans)
 [![MIT licensed](https://img.shields.io/github/license/m4tx/rans-rs)](https://github.com/m4tx/rans-rs/blob/master/LICENSE)
 [![codecov](https://codecov.io/gh/m4tx/rans-rs/branch/master/graph/badge.svg)](https://codecov.io/gh/m4tx/rans-rs)
