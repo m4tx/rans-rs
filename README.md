@@ -30,7 +30,7 @@ rans = "0.2.0"
 
 ## Examples
 
-```
+```rust
 use rans::byte_decoder::{ByteRansDecSymbol, ByteRansDecoder};
 use rans::byte_encoder::{ByteRansEncSymbol, ByteRansEncoder};
 use rans::{RansDecSymbol, RansDecoder, RansEncSymbol, RansEncoder, RansEncoderMulti};

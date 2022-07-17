@@ -1,4 +1,2 @@
 ignore-not-existing: true
 llvm: true
-ignore:
-  - "idencomp-cli/*"

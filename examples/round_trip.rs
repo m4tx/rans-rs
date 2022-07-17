@@ -1,3 +1,4 @@
+#[allow(clippy::new_without_default)]
 use rans::byte_decoder::{ByteRansDecSymbol, ByteRansDecoderMulti};
 use rans::byte_encoder::{ByteRansEncSymbol, ByteRansEncoderMulti};
 use rans::{RansDecSymbol, RansDecoderMulti, RansEncSymbol, RansEncoderMulti};

@@ -64,6 +64,7 @@ jobs:
         uses: actions-rs/grcov@v0.1
       - uses: codecov/codecov-action@v2
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
           files: ${{ steps.coverage.outputs.report }}
 
   rustfmt:
