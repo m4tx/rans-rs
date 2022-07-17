@@ -1,0 +1,29 @@
+[package]
+name = "rans"
+version = "0.2.0"
+edition = "2021"
+description = "rANS (range variant of Asymmetric Numeral Systems) encoder and decoder"
+categories = ["encoding", "compression"]
+authors = ["Mateusz Maćkowski <mateusz@mackowski.org>"]
+keywords = ["rANS", "ANS", "coding", "compression", "entropy", "arithmetic"]
+readme = "README.md"
+repository = "https://github.com/m4tx/rans-rs.git"
+homepage = "https://github.com/m4tx/rans-rs"
+license = "MIT"
+
+[dependencies]
+ryg-rans-sys = { version = "1.0.7", features = ["byte", "64"] }
+
+[dev-dependencies]
+criterion = "0.3.6"
+rand = "0.8.5"
+rand_xoshiro = "0.6.0"
+lazy_static = "1.4.0"
+
+[lib]
+name = "rans"
+crate-type = ["staticlib", "cdylib", "lib"]
+
+[[bench]]
+name = "benchmark"
+harness = false
