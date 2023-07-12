@@ -70,3 +70,12 @@ The project is licensed under the [MIT license](LICENSE).
 Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in the project by you shall be licensed as MIT, without any
 additional terms or conditions.
+
+## Developing
+### `pre-commit`
+We encourage contributors to use predefined [`pre-commit`](https://pre-commit.com/)
+hooks --- to install them in your local repo, make sure you have `pre-commit`
+installed and run
+```shell
+pre-commit install
+```
