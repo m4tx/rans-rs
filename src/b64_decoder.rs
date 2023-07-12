@@ -1,5 +1,6 @@
 use std::mem::MaybeUninit;
 
+use crate::decoder::check_dec_pointer;
 use crate::mut_cow::MutCow;
 use crate::{RansDecSymbol, RansDecoder, RansDecoderMulti};
 
@@ -78,7 +79,7 @@ impl<'a, const N: usize> RansDecoderMulti<N> for B64RansDecoderMulti<'a, N> {
             );
         }
 
-        debug_assert!(self.is_ptr_valid());
+        check_dec_pointer!(self);
     }
 
     #[inline]
@@ -102,7 +103,7 @@ impl<'a, const N: usize> RansDecoderMulti<N> for B64RansDecoderMulti<'a, N> {
             ryg_rans_sys::rans_64::rans_64_dec_renorm(&mut self.states[channel], &mut self.ptr);
         }
 
-        debug_assert!(self.is_ptr_valid());
+        check_dec_pointer!(self);
     }
 }
 

@@ -1,6 +1,6 @@
 use std::mem::MaybeUninit;
 
-use crate::encoder::{RansEncSymbol, RansEncoder, RansEncoderMulti};
+use crate::encoder::{check_enc_pointer, RansEncSymbol, RansEncoder, RansEncoderMulti};
 
 /// Multi-stream interleaved rANS encoder - byte-aligned version.
 #[derive(Debug)]
@@ -83,7 +83,7 @@ impl<const N: usize> RansEncoderMulti<N> for ByteRansEncoderMulti<N> {
             );
         }
 
-        debug_assert!(self.is_ptr_valid());
+        check_enc_pointer!(self);
     }
 
     #[inline]
@@ -94,7 +94,7 @@ impl<const N: usize> RansEncoderMulti<N> for ByteRansEncoderMulti<N> {
             ryg_rans_sys::rans_byte::rans_enc_flush(&mut self.states[channel], &mut self.ptr);
         }
 
-        debug_assert!(self.is_ptr_valid());
+        check_enc_pointer!(self);
     }
 
     #[inline]

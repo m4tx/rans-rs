@@ -186,6 +186,13 @@ pub trait RansDecSymbol {
     fn freq(&self) -> u32;
 }
 
+macro_rules! check_dec_pointer {
+    ($self:ident) => {
+        debug_assert!($self.is_ptr_valid(), "Data pointer is in an invalid state. Make sure you are not reading more symbols than originally encoded.");
+    }
+}
+pub(crate) use check_dec_pointer;
+
 #[cfg(test)]
 pub(crate) mod tests {
     use crate::decoder::RansDecSymbol;
@@ -260,7 +267,7 @@ pub(crate) mod tests {
     #[must_use]
     fn get_symbol<'a, T: RansDecSymbol>(symbols: &'a [&T], cum_freq: u32) -> &'a T {
         for symbol in symbols {
-            if cum_freq < symbol.cum_freq() as u32 + symbol.freq() as u32 {
+            if cum_freq < symbol.cum_freq() + symbol.freq() {
                 return symbol;
             }
         }

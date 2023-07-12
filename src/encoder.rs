@@ -166,6 +166,13 @@ pub trait RansEncSymbol {
     fn new(cum_freq: u32, freq: u32, scale_bits: u32) -> Self;
 }
 
+macro_rules! check_enc_pointer {
+    ($self:ident) => {
+        debug_assert!($self.is_ptr_valid(), "Data pointer is in an invalid state. Consider calling reset() earlier or increasing `max_len` when constructing the encoder.");
+    }
+}
+pub(crate) use check_enc_pointer;
+
 #[cfg(test)]
 pub(crate) mod tests {
     use crate::encoder::{RansEncSymbol, RansEncoder, RansEncoderMulti};

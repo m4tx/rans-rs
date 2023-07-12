@@ -1,5 +1,3 @@
-#![warn(missing_docs)]
-
 //! Ranged Asymmetric Numeral Systems (rANS) encoder and decoder. Under the
 //! hood, this is a high-level wrapper over
 //! [ryg-rans-sys](https://github.com/m4tx/ryg-rans-sys/).
@@ -54,6 +52,16 @@
 //! assert_eq!(decoder.get(SCALE_BITS), 0);
 //! decoder.advance(&symbol1, SCALE_BITS);
 //! ```
+
+#![deny(
+    missing_docs,
+    missing_debug_implementations,
+    trivial_numeric_casts,
+    unreachable_pub,
+    unstable_features,
+    unused_import_braces,
+    unused_qualifications
+)]
 
 pub use decoder::*;
 pub use encoder::*;

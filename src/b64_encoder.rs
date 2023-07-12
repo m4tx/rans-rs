@@ -1,7 +1,7 @@
 use std::mem::MaybeUninit;
 use std::slice;
 
-use crate::encoder::{RansEncSymbol, RansEncoder, RansEncoderMulti};
+use crate::encoder::{check_enc_pointer, RansEncSymbol, RansEncoder, RansEncoderMulti};
 
 /// Multi-stream interleaved rANS encoder - 64-bit version.
 #[derive(Debug)]
@@ -86,7 +86,7 @@ impl<const N: usize> RansEncoderMulti<N> for B64RansEncoderMulti<N> {
             );
         }
 
-        debug_assert!(self.is_ptr_valid());
+        check_enc_pointer!(self);
     }
 
     #[inline]
@@ -97,7 +97,7 @@ impl<const N: usize> RansEncoderMulti<N> for B64RansEncoderMulti<N> {
             ryg_rans_sys::rans_64::rans_64_enc_flush(&mut self.states[channel], &mut self.ptr);
         }
 
-        debug_assert!(self.is_ptr_valid());
+        check_enc_pointer!(self);
     }
 
     #[inline]
