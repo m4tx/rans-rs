@@ -107,4 +107,14 @@ mod tests {
 
         assert_eq!(*mut_cow, [5, 2, 3, 4]);
     }
+
+    #[test]
+    fn test_has_debug_output() {
+        let mut data: [u8; 4] = [1, 2, 3, 4];
+        let mut_cow_borrowed = MutCow::from(&mut data);
+        assert!(!format!("{mut_cow_borrowed:?}").is_empty());
+
+        let mut_cow_owned = MutCow::from(vec![1, 2, 3, 4]);
+        assert!(!format!("{mut_cow_owned:?}").is_empty());
+    }
 }

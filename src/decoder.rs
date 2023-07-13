@@ -195,6 +195,8 @@ pub(crate) use check_dec_pointer;
 
 #[cfg(test)]
 pub(crate) mod tests {
+    use std::fmt::Debug;
+
     use crate::decoder::RansDecSymbol;
     use crate::{RansDecoder, RansDecoderMulti};
 
@@ -301,5 +303,9 @@ pub(crate) mod tests {
         decoder.advance_step_at(0, &symbol1, SCALE_BITS);
         decoder.advance_step_at(1, &symbol1, SCALE_BITS);
         decoder.renorm_all();
+    }
+
+    pub(crate) fn test_has_debug_output<T: RansDecoder + Debug>(decoder: T) {
+        assert!(!format!("{decoder:?}").is_empty());
     }
 }

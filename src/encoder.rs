@@ -175,9 +175,13 @@ pub(crate) use check_enc_pointer;
 
 #[cfg(test)]
 pub(crate) mod tests {
+    use std::fmt::Debug;
+
     use crate::encoder::{RansEncSymbol, RansEncoder, RansEncoderMulti};
 
     pub(crate) fn test_encode_nothing<T: RansEncoder>(encoder: T) {
+        assert_eq!(encoder.len(), 0);
+        assert!(encoder.is_empty());
         assert!(encoder.data().is_empty());
     }
 
@@ -196,6 +200,8 @@ pub(crate) mod tests {
         encoder.put(&symbol2);
         encoder.flush();
 
+        assert_eq!(encoder.len(), data.len());
+        assert!(!encoder.is_empty());
         assert_eq!(encoder.data(), data);
     }
 
@@ -214,6 +220,8 @@ pub(crate) mod tests {
         encoder.put(&symbol2.clone());
         encoder.flush();
 
+        assert_eq!(encoder.len(), data.len());
+        assert!(!encoder.is_empty());
         assert_eq!(encoder.data(), data);
     }
 
@@ -228,12 +236,16 @@ pub(crate) mod tests {
 
         encoder.put(&symbol1);
         encoder.flush();
+        assert_eq!(encoder.len(), data1.len());
+        assert!(!encoder.is_empty());
         assert_eq!(encoder.data(), data1);
 
         encoder.reset();
 
         encoder.put(&symbol2);
         encoder.flush();
+        assert_eq!(encoder.len(), data2.len());
+        assert!(!encoder.is_empty());
         assert_eq!(encoder.data(), data2);
     }
 
@@ -278,5 +290,9 @@ pub(crate) mod tests {
         encoder.flush_all();
 
         assert_eq!(encoder.data(), data);
+    }
+
+    pub(crate) fn test_has_debug_output<T: RansEncoder + Debug>(encoder: T) {
+        assert!(!format!("{encoder:?}").is_empty());
     }
 }

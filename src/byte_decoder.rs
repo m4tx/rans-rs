@@ -182,4 +182,10 @@ mod tests {
 
         dec_tests::test_decode_interleaved(decoder);
     }
+
+    #[test]
+    fn test_has_debug_output() {
+        let decoder = ByteRansDecoder::new([0, 0, 128, 0]);
+        dec_tests::test_has_debug_output(decoder);
+    }
 }

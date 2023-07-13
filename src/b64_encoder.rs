@@ -203,4 +203,10 @@ mod tests {
 
         enc_tests::encode_interleaved(encoder, &data);
     }
+
+    #[test]
+    fn test_has_debug_output() {
+        let encoder = B64RansEncoder::new(1024);
+        enc_tests::test_has_debug_output(encoder);
+    }
 }
