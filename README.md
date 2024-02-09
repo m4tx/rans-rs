@@ -26,7 +26,7 @@ Add the following to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-rans = "0.3.0"
+rans = "0.4.0"
 ```
 
 ## Examples
