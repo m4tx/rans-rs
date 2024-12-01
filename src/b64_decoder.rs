@@ -56,7 +56,7 @@ impl<'a, const N: usize> B64RansDecoderMulti<'a, N> {
     }
 }
 
-impl<'a, const N: usize> RansDecoderMulti<N> for B64RansDecoderMulti<'a, N> {
+impl<const N: usize> RansDecoderMulti<N> for B64RansDecoderMulti<'_, N> {
     type Symbol = B64RansDecSymbol;
 
     #[inline]
@@ -107,7 +107,7 @@ impl<'a, const N: usize> RansDecoderMulti<N> for B64RansDecoderMulti<'a, N> {
     }
 }
 
-impl<'a> RansDecoder for B64RansDecoderMulti<'a, 1> {}
+impl RansDecoder for B64RansDecoderMulti<'_, 1> {}
 
 /// rANS decoder symbol - 64-bit version.
 #[derive(Debug, Clone)]
@@ -170,7 +170,7 @@ mod tests {
         let mut data = [
             122, 27, 118, 146, 40, 184, 212, 0, 147, 60, 144, 230, 24, 137, 205, 128,
         ];
-        let decoder = B64RansDecoder::new(&mut data);
+        let decoder = B64RansDecoder::new(data);
 
         dec_tests::test_decode_more_data(decoder);
     }
@@ -178,7 +178,7 @@ mod tests {
     #[test]
     fn test_decode_interleaved() {
         let mut data = [108, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 0];
-        let decoder = B64RansDecoderMulti::<2>::new(&mut data);
+        let decoder = B64RansDecoderMulti::<2>::new(data);
 
         dec_tests::test_decode_interleaved(decoder);
     }

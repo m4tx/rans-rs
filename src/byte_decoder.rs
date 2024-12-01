@@ -56,7 +56,7 @@ impl<'a, const N: usize> ByteRansDecoderMulti<'a, N> {
     }
 }
 
-impl<'a, const N: usize> RansDecoderMulti<N> for ByteRansDecoderMulti<'a, N> {
+impl<const N: usize> RansDecoderMulti<N> for ByteRansDecoderMulti<'_, N> {
     type Symbol = ByteRansDecSymbol;
 
     #[inline]
@@ -107,7 +107,7 @@ impl<'a, const N: usize> RansDecoderMulti<N> for ByteRansDecoderMulti<'a, N> {
     }
 }
 
-impl<'a> RansDecoder for ByteRansDecoderMulti<'a, 1> {}
+impl RansDecoder for ByteRansDecoderMulti<'_, 1> {}
 
 /// rANS decoder symbol - byte-aligned version.
 #[derive(Debug, Clone)]
@@ -170,7 +170,7 @@ mod tests {
         let mut data = [
             106, 184, 212, 0, 84, 205, 93, 162, 171, 34, 28, 50, 161, 66, 2,
         ];
-        let decoder = ByteRansDecoder::new(&mut data);
+        let decoder = ByteRansDecoder::new(data);
 
         dec_tests::test_decode_more_data(decoder);
     }
@@ -178,7 +178,7 @@ mod tests {
     #[test]
     fn test_decode_interleaved() {
         let mut data = [12, 0, 128, 0, 0, 0, 128, 0, 24, 0];
-        let decoder = ByteRansDecoderMulti::<2>::new(&mut data);
+        let decoder = ByteRansDecoderMulti::<2>::new(data);
 
         dec_tests::test_decode_interleaved(decoder);
     }

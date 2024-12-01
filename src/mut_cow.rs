@@ -43,19 +43,19 @@ impl<'a, const N: usize> From<&'a mut [u8; N]> for MutCow<'a, [u8]> {
     }
 }
 
-impl<'a, const N: usize> From<[u8; N]> for MutCow<'a, [u8]> {
+impl<const N: usize> From<[u8; N]> for MutCow<'_, [u8]> {
     fn from(owned: [u8; N]) -> Self {
         Self::Owned(Vec::from(owned))
     }
 }
 
-impl<'a> From<Vec<u8>> for MutCow<'a, [u8]> {
+impl From<Vec<u8>> for MutCow<'_, [u8]> {
     fn from(owned: Vec<u8>) -> Self {
         Self::Owned(owned)
     }
 }
 
-impl<'a> Deref for MutCow<'a, [u8]> {
+impl Deref for MutCow<'_, [u8]> {
     type Target = [u8];
 
     fn deref(&self) -> &Self::Target {
@@ -66,7 +66,7 @@ impl<'a> Deref for MutCow<'a, [u8]> {
     }
 }
 
-impl<'a> DerefMut for MutCow<'a, [u8]> {
+impl DerefMut for MutCow<'_, [u8]> {
     fn deref_mut(&mut self) -> &mut Self::Target {
         match self {
             MutCow::Borrowed(reference) => reference,
